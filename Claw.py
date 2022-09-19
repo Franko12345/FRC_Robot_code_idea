@@ -1,5 +1,5 @@
 import com.qualcomm.robotcore.hardware.DcMotor
 
-class claw():
+class Claw():
 	def __init__(self):
 		self.motor_claw = hardwareMap.dcMotor.get("motorclaw")

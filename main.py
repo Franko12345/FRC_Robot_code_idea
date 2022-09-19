@@ -11,7 +11,7 @@ def main():
 	conveyerInstance = Conveyer()
 	shooterInstance = Shooter()
 	waterPumpInstance = WaterPump()
-	clawInstance = claw()
+	clawInstance = Claw()
 
 	Robot = RobotCore(chassiInstance, shooterInstance, conveyerInstance, waterPumpInstance, clawInstance)
 	Robot.Start()
