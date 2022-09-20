@@ -1,5 +1,6 @@
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.Sensor
+import hardwareMap
 import time
 import math
 import threading
@@ -54,7 +55,7 @@ class Chassi():
 
 			errorRate = (error - self.lastError) / deltaTime #taxa de variação de erro
 
-			outputSpeed = (KP * error) + (KI * errorSum) + (KD * errorRate) #apicação do PID
+			outputSpeed = (KP * error) + (KI * self.errorSum) + (KD * errorRate) #apicação do PID
 
 			for motor in motors:
 				motor.setPower(outputSpeed)
@@ -68,14 +69,14 @@ class Chassi():
 
 
 	def Straight(self, goal):
-		SetMotorGoal([self.motorLeft1, self.motorLeft2, self.motorRight1, self.motorRight2], goal, encoder=self.encoderLeft) 
+		self.SetMotorGoal([self.motorLeft1, self.motorLeft2, self.motorRight1, self.motorRight2], goal, encoder=self.encoderLeft) 
 		#indo reto então nao importa qual encoder escolher
 
 	def Curve(self, angle):
 		#sentido antí-horário
-		threadRight = threading.Thread(target=SetMotorGoal, args=([self.motorRight1, self.motorRight2], (angle*AngleToMeter)/2, self.encoderRight))
-		threadLeft = threading.Thread(target=SetMotorGoal, args=([self.motorLeft1, self.motorLeft2], -(angle*AngleToMeter)/2, self.encoderLeft))
-		#curva necessia de encoder específico para cálculo PID
+		threadRight = threading.Thread(target=self.SetMotorGoal, args=([self.motorRight1, self.motorRight2], (angle*AngleToMeter)/2, self.encoderRight))
+		threadLeft = threading.Thread(target=self.SetMotorGoal, args=([self.motorLeft1, self.motorLeft2], -(angle*AngleToMeter)/2, self.encoderLeft))
+		#curva necessita de encoder específico para cálculo PID
 		#threads pois para os dois motores ser ativados ao mesmo tempo
 
 		threadLeft.start()
