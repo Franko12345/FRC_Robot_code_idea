@@ -5,6 +5,7 @@ from Conveyer.py import *
 from WaterPump.py import *
 from Claw.py import *
 from Intake.py import *
+import driverStation
 
 def main():
 	chassiInstance = Chassi()
@@ -14,7 +15,7 @@ def main():
 	clawInstance = Claw()
 
 	Robot = RobotCore(chassiInstance, shooterInstance, conveyerInstance, waterPumpInstance, clawInstance)
-	Robot.Start()
+	Robot.Start(driverStation.get("autonomousMode"))
 
 if __name__ == '__main__':
 	main()

@@ -11,9 +11,9 @@ class RobotCore():
 		self.clawI = clawI
 		self.intakeI = intakeI
 	
-	def Start(self):
+	def Start(self, mode):
 		self.intakeI.Activate()
-		self.Autonomous()
+		self.Autonomous(mode)
 
 	def Autonomous(self, mode):
 		autonomousTime = time.time()
