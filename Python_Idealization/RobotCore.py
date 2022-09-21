@@ -31,6 +31,9 @@ class RobotCore():
 
 			self.chassiI.Straight(0.1)
 			#encostar na water pump
+			
+			while time.time()-autonomousTime <= 10: # esperar 10 segundos para garantir 8 bolas no WT
+				pass
 
 			self.waterPumpI.programWaterPump()
 			#prorgamar water-pump
@@ -47,6 +50,9 @@ class RobotCore():
 
 			self.chassiI.Straight(0.1)
 
+			while time.time()-autonomousTime <= 10: # esperar 10 segundos para garantir 8 bolas no WT
+				pass
+				
 			self.waterPumpI.programWaterPump()
 
 		while time.time()-autonomousTime <= 15:
